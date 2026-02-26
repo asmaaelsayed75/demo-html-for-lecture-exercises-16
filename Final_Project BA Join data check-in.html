@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Team BA2">
+
+<title>Final_Project_Join Data Check-In</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Final_Project BA Join data check-in_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/popper.min.js"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Final_Project BA Join data check-in_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Final_Project BA Join data check-in_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Final_Project BA Join data check-in_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Final_Project BA Join data check-in_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Final_Project BA Join data check-in_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Final_Project BA Join data check-in_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Final_Project_Join Data Check-In</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Team BA2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
+<ul>
+<li><p>USDA Food Access Research Atlas:<br>
+https://www.ers.usda.gov/data-products/food-access-research-atlas</p></li>
+<li><p>CDC PLACES Census Tract Data:<br>
+https://www.cdc.gov/places/</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="usda" class="level2">
+<h2 class="anchored" data-anchor-id="usda">USDA</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usda_food <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"~/Downloads/lab BA2 dataset/FoodAccessResearchAtlasData2019.csv"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(usda_food)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 72,531
+Columns: 147
+$ CensusTract          &lt;chr&gt; "01001020100", "01001020200", "01001020300", "010…
+$ State                &lt;chr&gt; "Alabama", "Alabama", "Alabama", "Alabama", "Alab…
+$ County               &lt;chr&gt; "Autauga County", "Autauga County", "Autauga Coun…
+$ Urban                &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1…
+$ Pop2010              &lt;dbl&gt; 1912, 2170, 3373, 4386, 10766, 3668, 2891, 3081, …
+$ OHU2010              &lt;dbl&gt; 693, 743, 1256, 1722, 4082, 1311, 1188, 1074, 369…
+$ GroupQuartersFlag    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ NUMGQTRS             &lt;dbl&gt; 0, 181, 0, 0, 181, 0, 36, 0, 0, 14, 10, 33, 31, 6…
+$ PCTGQTRS             &lt;dbl&gt; 0.00, 8.34, 0.00, 0.00, 1.68, 0.00, 1.25, 0.00, 0…
+$ LILATracts_1And10    &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+$ LILATracts_halfAnd10 &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+$ LILATracts_1And20    &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ LILATracts_Vehicle   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…
+$ HUNVFlag             &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0…
+$ LowIncomeTracts      &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
+$ PovertyRate          &lt;dbl&gt; 11.3, 17.9, 15.0, 2.8, 15.2, 21.6, 30.5, 8.9, 13.…
+$ MedianFamilyIncome   &lt;chr&gt; "81250", "49000", "62609", "70607", "96334", "695…
+$ LA1and10             &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1…
+$ LAhalfand10          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1…
+$ LA1and20             &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1…
+$ LATracts_half        &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1…
+$ LATracts1            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1…
+$ LATracts10           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+$ LATracts20           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ LATractsVehicle_20   &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0…
+$ LAPOP1_10            &lt;chr&gt; "1896", "1261", "1552", "1363", "2643", "3438", "…
+$ LAPOP05_10           &lt;chr&gt; "1912", "2170", "2857", "3651", "7778", "3668", "…
+$ LAPOP1_20            &lt;chr&gt; "1896", "1261", "1552", "1363", "2643", "3438", "…
+$ LALOWI1_10           &lt;chr&gt; "461", "604", "478", "343", "586", "1585", "742",…
+$ LALOWI05_10          &lt;chr&gt; "467", "962", "971", "893", "1719", "1674", "1307…
+$ LALOWI1_20           &lt;chr&gt; "461", "604", "478", "343", "586", "1585", "742",…
+$ lapophalf            &lt;chr&gt; "1912", "2170", "2857", "3651", "7778", "3668", "…
+$ lapophalfshare       &lt;chr&gt; "100.00", "100.00", "84.70", "83.24", "72.25", "1…
+$ lalowihalf           &lt;chr&gt; "467", "962", "971", "893", "1719", "1674", "1307…
+$ lalowihalfshare      &lt;chr&gt; "24.42", "44.34", "28.79", "20.36", "15.97", "45.…
+$ lakidshalf           &lt;chr&gt; "507", "606", "771", "847", "2309", "1008", "557"…
+$ lakidshalfshare      &lt;chr&gt; "26.52", "27.93", "22.86", "19.30", "21.45", "27.…
+$ laseniorshalf        &lt;chr&gt; "221", "214", "358", "767", "840", "411", "277", …
+$ laseniorshalfshare   &lt;chr&gt; "11.56", "9.86", "10.60", "17.48", "7.80", "11.21…
+$ lawhitehalf          &lt;chr&gt; "1622", "888", "2177", "3395", "6299", "2751", "1…
+$ lawhitehalfshare     &lt;chr&gt; "84.83", "40.92", "64.53", "77.41", "58.51", "75.…
+$ lablackhalf          &lt;chr&gt; "217", "1217", "554", "170", "1001", "740", "337"…
+$ lablackhalfshare     &lt;chr&gt; "11.35", "56.08", "16.43", "3.88", "9.29", "20.17…
+$ laasianhalf          &lt;chr&gt; "14", "5", "10", "15", "209", "9", "10", "16", "6…
+$ laasianhalfshare     &lt;chr&gt; "0.73", "0.23", "0.30", "0.34", "1.94", "0.25", "…
+$ lanhopihalf          &lt;chr&gt; "0", "0", "1", "3", "5", "1", "3", "0", "7", "3",…
+$ lanhopihalfshare     &lt;chr&gt; "0.00", "0.00", "0.03", "0.06", "0.05", "0.03", "…
+$ laaianhalf           &lt;chr&gt; "14", "5", "10", "8", "38", "10", "9", "27", "49"…
+$ laaianhalfshare      &lt;chr&gt; "0.73", "0.23", "0.30", "0.18", "0.35", "0.27", "…
+$ laomultirhalf        &lt;chr&gt; "45", "55", "105", "60", "227", "157", "79", "70"…
+$ laomultirhalfshare   &lt;chr&gt; "2.35", "2.53", "3.10", "1.38", "2.11", "4.28", "…
+$ lahisphalf           &lt;chr&gt; "44", "75", "78", "61", "277", "176", "82", "57",…
+$ lahisphalfshare      &lt;chr&gt; "2.30", "3.46", "2.30", "1.40", "2.57", "4.80", "…
+$ lahunvhalf           &lt;chr&gt; "5", "93", "39", "19", "164", "73", "23", "74", "…
+$ lahunvhalfshare      &lt;chr&gt; "0.79", "12.47", "3.09", "1.13", "4.01", "5.54", …
+$ lasnaphalf           &lt;chr&gt; "92", "161", "139", "84", "235", "220", "263", "1…
+$ lasnaphalfshare      &lt;chr&gt; "13.33", "21.70", "11.05", "4.88", "5.76", "16.82…
+$ lapop1               &lt;chr&gt; "1896", "1261", "1552", "1363", "2643", "3438", "…
+$ lapop1share          &lt;chr&gt; "99.19", "58.11", "46.00", "31.09", "24.55", "93.…
+$ lalowi1              &lt;chr&gt; "461", "604", "478", "343", "586", "1585", "742",…
+$ lalowi1share         &lt;chr&gt; "24.11", "27.83", "14.18", "7.83", "5.45", "43.21…
+$ lakids1              &lt;chr&gt; "504", "406", "416", "346", "715", "955", "298", …
+$ lakids1share         &lt;chr&gt; "26.33", "18.69", "12.34", "7.89", "6.64", "26.03…
+$ laseniors1           &lt;chr&gt; "219", "127", "201", "237", "362", "375", "109", …
+$ laseniors1share      &lt;chr&gt; "11.44", "5.83", "5.96", "5.39", "3.36", "10.22",…
+$ lawhite1             &lt;chr&gt; "1611", "357", "1242", "1233", "2168", "2539", "1…
+$ lawhite1share        &lt;chr&gt; "84.26", "16.43", "36.81", "28.12", "20.14", "69.…
+$ lablack1             &lt;chr&gt; "214", "854", "255", "81", "343", "726", "158", "…
+$ lablack1share        &lt;chr&gt; "11.17", "39.36", "7.56", "1.85", "3.19", "19.80"…
+$ laasian1             &lt;chr&gt; "14", "4", "8", "7", "47", "9", "4", "16", "43", …
+$ laasian1share        &lt;chr&gt; "0.72", "0.18", "0.24", "0.16", "0.44", "0.25", "…
+$ lanhopi1             &lt;chr&gt; "0", "0", "0", "2", "1", "1", "2", "0", "7", "3",…
+$ lanhopi1share        &lt;chr&gt; "0.00", "0.00", "0.00", "0.05", "0.01", "0.03", "…
+$ laaian1              &lt;chr&gt; "14", "4", "2", "4", "14", "9", "4", "27", "47", …
+$ laaian1share         &lt;chr&gt; "0.73", "0.20", "0.06", "0.08", "0.13", "0.26", "…
+$ laomultir1           &lt;chr&gt; "44", "42", "45", "37", "70", "153", "58", "70", …
+$ laomultir1share      &lt;chr&gt; "2.31", "1.93", "1.33", "0.84", "0.65", "4.16", "…
+$ lahisp1              &lt;chr&gt; "43", "33", "36", "30", "86", "168", "56", "57", …
+$ lahisp1share         &lt;chr&gt; "2.27", "1.52", "1.08", "0.68", "0.80", "4.59", "…
+$ lahunv1              &lt;chr&gt; "5", "67", "0", "8", "55", "72", "12", "74", "179…
+$ lahunv1share         &lt;chr&gt; "0.79", "9.00", "0.00", "0.46", "1.35", "5.47", "…
+$ lasnap1              &lt;chr&gt; "92", "96", "74", "30", "83", "206", "140", "150"…
+$ lasnap1share         &lt;chr&gt; "13.22", "12.95", "5.87", "1.76", "2.04", "15.70"…
+$ lapop10              &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lapop10share         &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lalowi10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lalowi10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lakids10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lakids10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laseniors10          &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laseniors10share     &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lawhite10            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lawhite10share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lablack10            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lablack10share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laasian10            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laasian10share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lanhopi10            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lanhopi10share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laaian10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laaian10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laomultir10          &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laomultir10share     &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahisp10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahisp10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahunv10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahunv10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lasnap10             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lasnap10share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lapop20              &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lapop20share         &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lalowi20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lalowi20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lakids20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lakids20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laseniors20          &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laseniors20share     &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lawhite20            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lawhite20share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lablack20            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lablack20share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laasian20            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laasian20share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lanhopi20            &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lanhopi20share       &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laaian20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laaian20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laomultir20          &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ laomultir20share     &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahisp20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahisp20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahunv20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lahunv20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lasnap20             &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ lasnap20share        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "…
+$ TractLOWI            &lt;dbl&gt; 455, 802, 1306, 922, 2242, 1659, 2175, 527, 3103,…
+$ TractKids            &lt;dbl&gt; 507, 606, 894, 1015, 3162, 1008, 686, 815, 2909, …
+$ TractSeniors         &lt;dbl&gt; 221, 214, 439, 904, 1126, 411, 360, 341, 1060, 63…
+$ TractWhite           &lt;dbl&gt; 1622, 888, 2576, 4086, 8666, 2751, 2333, 2690, 87…
+$ TractBlack           &lt;dbl&gt; 217, 1217, 647, 193, 1437, 740, 435, 278, 1387, 6…
+$ TractAsian           &lt;dbl&gt; 14, 5, 17, 18, 296, 9, 13, 16, 61, 20, 3, 2, 6, 1…
+$ TractNHOPI           &lt;dbl&gt; 0, 0, 5, 4, 9, 1, 3, 0, 7, 3, 0, 0, 0, 0, 1, 0, 1…
+$ TractAIAN            &lt;dbl&gt; 14, 5, 11, 11, 48, 10, 11, 27, 49, 14, 18, 14, 64…
+$ TractOMultir         &lt;dbl&gt; 45, 55, 117, 74, 310, 157, 96, 70, 187, 124, 47, …
+$ TractHispanic        &lt;dbl&gt; 44, 75, 87, 85, 355, 176, 98, 57, 159, 96, 39, 39…
+$ TractHUNV            &lt;dbl&gt; 6, 89, 99, 21, 230, 71, 34, 68, 198, 97, 9, 269, …
+$ TractSNAP            &lt;dbl&gt; 102, 156, 172, 98, 339, 224, 390, 143, 352, 340, …</code></pre>
+</div>
+</div>
+</section>
+<section id="cdc" class="level2">
+<h2 class="anchored" data-anchor-id="cdc">CDC</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="st">"~/Downloads/lab BA2 dataset/PLACES_Census_Tract_Data_2024.csv"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(places)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,183,048
+Columns: 24
+$ Year                       &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2…
+$ StateAbbr                  &lt;chr&gt; "FL", "FL", "FL", "FL", "FL", "FL", "FL", "…
+$ StateDesc                  &lt;chr&gt; "Florida", "Florida", "Florida", "Florida",…
+$ CountyName                 &lt;chr&gt; "Miami-Dade", "Miami-Dade", "Miami-Dade", "…
+$ CountyFIPS                 &lt;chr&gt; "12086", "12086", "12086", "12086", "12086"…
+$ LocationName               &lt;chr&gt; "12086010025", "12086002709", "12086007807"…
+$ DataSource                 &lt;chr&gt; "BRFSS", "BRFSS", "BRFSS", "BRFSS", "BRFSS"…
+$ Category                   &lt;chr&gt; "Health Outcomes", "Disability", "Disabilit…
+$ Measure                    &lt;chr&gt; "Stroke among adults", "Vision disability a…
+$ Data_Value_Unit            &lt;chr&gt; "%", "%", "%", "%", "%", "%", "%", "%", "%"…
+$ Data_Value_Type            &lt;chr&gt; "Crude prevalence", "Crude prevalence", "Cr…
+$ Data_Value                 &lt;dbl&gt; 5.6, 3.1, 4.4, 10.0, 40.9, 22.2, 6.3, 38.4,…
+$ Data_Value_Footnote_Symbol &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ Data_Value_Footnote        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ Low_Confidence_Limit       &lt;dbl&gt; 5.1, 2.8, 4.0, 8.9, 37.3, 19.8, 5.8, 34.5, …
+$ High_Confidence_Limit      &lt;dbl&gt; 6.1, 3.4, 4.8, 11.2, 44.6, 24.7, 6.8, 42.5,…
+$ TotalPopulation            &lt;dbl&gt; 3992, 5273, 4438, 4835, 3577, 3330, 3256, 4…
+$ TotalPop18plus             &lt;dbl&gt; 3091, 4706, 3489, 4065, 2978, 2378, 2523, 3…
+$ Geolocation                &lt;chr&gt; "POINT (-80.254741 25.9664383)", "POINT (-8…
+$ LocationID                 &lt;chr&gt; "12086010025", "12086002709", "12086007807"…
+$ CategoryID                 &lt;chr&gt; "HLTHOUT", "DISABLT", "DISABLT", "HLTHSTAT"…
+$ MeasureId                  &lt;chr&gt; "STROKE", "VISION", "VISION", "PHLTH", "DIS…
+$ DataValueTypeID            &lt;chr&gt; "CrdPrv", "CrdPrv", "CrdPrv", "CrdPrv", "Cr…
+$ Short_Question_Text        &lt;chr&gt; "Stroke", "Vision Disability", "Vision Disa…</code></pre>
+</div>
+</div>
+<p><em>We plan to join the USDA Food Access Research Atlas data with the CDC PLACES census tract data using census tract identifiers. The USDA file uses CensusTract, and the CDC file uses LocationName. We will format them consistently and use a left join after filtering the CDC data to obesity and diabetes.</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
